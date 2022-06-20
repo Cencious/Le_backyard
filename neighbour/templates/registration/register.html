@@ -3,11 +3,11 @@
     <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6">
-            <h1 class="text-center">Aw-wards</h1>
+            <h1 class="text-center">Le-Backyard</h1>
             <form method="POST">
                 {% csrf_token %}
                 <fieldset class="form-group">
-                    <legend class="border-bottom mb-4 text-center">Welcome to The NEighbourhood. Register below </legend>
+                    <legend class="border-bottom mb-4 text-center">Welcome to Le-backyard site. Register below </legend>
                     {{ form|crispy }}
                 </fieldset>
                 <div class="form-group text-center">
@@ -16,7 +16,7 @@
             </form><br>
             <div class="border-top pt-3 text-center">
                 <small class="text-muted">Already Have an Account?
-                        <a href="{% url 'login' %}">Log In</a>
+                      
                     </small>
             </div>
         </div>
