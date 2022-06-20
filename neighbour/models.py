@@ -17,6 +17,36 @@ class Location(models.Model):
     
     def __str__(self):
         return self.name
+class NeighbourHood(models.Model):
+    name = models.CharField(max_length=200)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE)
+    occupants_count = models.IntegerField(default=0)
+    admin = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    police_cont=models.IntegerField(null=True,blank=True)
+    hospital_cont=models.IntegerField(null=True,blank=True)
+    photo=CloudinaryField(blank=True,) 
+
+    def create_neighborhood(self):
+        self.save()
+
+    @classmethod
+    def delete_neighborhood(cls, id):
+        cls.objects.filter(id=id).delete()
+
+    @classmethod
+    def search_by_name(cls,search_term):
+        hood =cls.objects.filter(name__icontains=search_term)
+
+    @classmethod
+    def find_neighborhood(cls,id):
+        hood =cls.objects.get(id=id)
+        return hood
+
+    def __str__(self):
+        return "%s neighborhood" % self.name
+
+
 
 
 class Profile(models.Model):
@@ -24,7 +54,7 @@ class Profile(models.Model):
     profile_photo = CloudinaryField('image')
     bio =models.TextField
     location= models.ForeignKey(Location,on_delete=models.CASCADE)
-    neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE, null=True)
+    neighbourhood = models.ForeignKey(NeighbourHood, on_delete=models.CASCADE, null=True)
     contact = models.CharField(max_length=50, blank=True, null=True)
     joined_on = models.DateTimeField(auto_now=True)
 
@@ -53,4 +83,7 @@ class Profile(models.Model):
     @receiver(post_save, sender=User)
     def save_user_profile(sender, instance, **kwargs):
         instance.profile.save()
+
+
+
     
