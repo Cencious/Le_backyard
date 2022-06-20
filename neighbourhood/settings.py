@@ -9,7 +9,9 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -38,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'neighbour',
+    'crispy_forms',
+    'cloudinary',
 ]
 
 MIDDLEWARE = [
@@ -100,6 +104,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
+# adding config
+cloudinary.config( 
+  cloud_name = "dv6nw0q0h", 
+  api_key = "568678726622523", 
+  api_secret = "n8VasdJV4fqJYDes45AZMvBtNCA" 
+)
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
