@@ -14,7 +14,7 @@
             <legend class="border-bottom mb-4 text-center">Welcome to <span class="text-warning">Le-</span>Backyard</a> Registration </legend>
         </div>
         <div class="card-body">
-          <form  action="/accounts/register/" method="post">
+          <form  action="{% url 'register'%}" method="post">
             {% csrf_token %}
             {% bootstrap_form form %}
             <div class="form-group">
@@ -22,7 +22,7 @@
             </div>
             <input type="hidden" name="next" value="{{next}}">
           </form>
-          <p class="mt-5">Already Have an Account, <a href="/accounts/login/" class="text-primary">Login</a></p>
+          <p class="mt-5">Already Have an Account, <a href="{% url 'login' %}" class="text-primary">Login</a></p>
         </div>
       </div>
     </div>
