@@ -1,24 +1,30 @@
-{% extends 'base.html'%} {%load crispy_forms_tags%} {% block content %} {{block.super}}
-<div class="container"><br><br>
+{%extends "base.html"%}
+{% load bootstrap4 %}
+{% block content %}
+<div class="container">
     <div class="row">
-        <div class="col-md-6"><img src="https://images.pexels.com/photos/5847766/pexels-photo-5847766.jpeg?auto=compress&cs=tinysrgb&w=1600" alt=""></div>
+        <!-- Empty div -->
+        <div class="col-md-6 phones"><img src="https://theupay.com/bank/Assets/login.jpg"></div>
         <div class="col-md-6">
-            <h1 class="text-center border-bottom mb-4">Le-Backyard</h1>
-            <form method="POST">
-                {% csrf_token %}
-                <fieldset class="form-group">
-                    {{ form|crispy }}
-                </fieldset>
-                <div class="form-group text-center">
-                    <button class="btn btn-outline-info" type="submit">Log In</button>
+       
+            <div class="card mt-5">
+                <div class="card-header">
+                    <h3 class="text-center sign">Sign In</h3>
                 </div>
-            </form><br>
-            <div class="border-top pt-3 text-center">
-                <small class="text-muted">Don't Have an Account?
-                <a href="{% url 'register' %}">Sign Up</a>
-            </small>
+                <div class="card-body">
+                    <form action="/accounts/login/" method="post">
+                        {% csrf_token %}
+                        {% bootstrap_form form%}
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-dark" value="Login">
+                        </div>
+                        <input type="hidden" name="next" value="{{next}}">
+                    </form>
+                    <p class="mt-5">Don't Have an Account, <a href="/accounts/register/" class="text-primary">Register</a></p>
+                </div>
             </div>
         </div>
+        <!-- empty div -->
         <div class="col-md-4"></div>
     </div>
 </div>
