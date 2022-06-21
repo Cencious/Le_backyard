@@ -1,2 +1,3 @@
 yard/
 __pycache__/
+.env/
