@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'neighbour',
     'crispy_forms',
     'cloudinary',
+    'bootstrap4',
 ]
 
 MIDDLEWARE = [
