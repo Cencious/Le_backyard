@@ -1,26 +1,33 @@
-{% extends 'base.html'%} {% load crispy_forms_tags%} {% block content %} {{block.super}}
-<div class="container"><br><br>
-    <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-6">
-            <h1 class="text-center">Le-Backyard</h1>
-            <form method="POST">
-                {% csrf_token %}
-                <fieldset class="form-group">
-                    <legend class="border-bottom mb-4 text-center">Welcome to Le-Backyard Hood. Register below </legend>
-                    {{ form|crispy }}
-                </fieldset>
-                <div class="form-group text-center">
-                    <button class="btn btn-outline-info" type="submit">Sign Up</button>
-                </div>
-            </form><br>
-            <div class="border-top pt-3 text-center">
-                <small class="text-muted">Already Have an Account?
-                        <a href="{% url 'login' %}">Log In</a>
-                    </small>
-            </div>
+{%extends "base.html"%}
+{% load bootstrap4 %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <!-- Empty div -->
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      {% if form.errors %}
+        <p class="text-danger"> Some Information Might be Incorrect </p>
+      {% endif %}
+      <div class="card mt-5">
+        <div class="card-header">
+            <legend class="border-bottom mb-4 text-center">Welcome to <span class="text-warning">Le-</span>Backyard</a> Registration </legend>
         </div>
-        <div class="col-md-3"></div>
+        <div class="card-body">
+          <form  action="/accounts/register/" method="post">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <div class="form-group">
+              <input type="submit" class="btn btn-dark" value="Create Account">
+            </div>
+            <input type="hidden" name="next" value="{{next}}">
+          </form>
+          <p class="mt-5">Already Have an Account, <a href="/accounts/login/" class="text-primary">Login</a></p>
+        </div>
+      </div>
     </div>
+    <!-- empty div -->
+    <div class="col-md-4"></div>
+  </div>
 </div>
 {% endblock %}
