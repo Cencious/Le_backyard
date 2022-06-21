@@ -1,11 +1,10 @@
 from django.test import TestCase
 
-# Create your tests here.
-
 from django.test import TestCase
 from .models import Post,  Profile, Location, NeighbourHood, Business
 from django.contrib.auth.models import User
 
+# Create your tests here.
 
 # Neighbourhood Model Tests
 class NeighbourhoodTestClass(TestCase):
