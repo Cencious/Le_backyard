@@ -117,6 +117,10 @@ cloudinary.config(
   api_secret = "n8VasdJV4fqJYDes45AZMvBtNCA" 
 )
 
+LOGIN_REDIRECT_URL = 'home'
+LOGIN_URL = 'login'
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
