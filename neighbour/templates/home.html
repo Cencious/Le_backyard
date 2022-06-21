@@ -1,5 +1,6 @@
 {% extends 'base.html'%}
 {% block content %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -108,7 +109,7 @@ body {
 
     </style>
 </head>
-<body>
+<body m>
     
 
    
@@ -158,43 +159,74 @@ body {
 <!-- about section -->
 
 <section id="about" class="about-section-padding">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4 col-md-12 col-12">
-                <div class="about-img">
-                    <img src="https://images.pexels.com/photos/6077656/pexels-photo-6077656.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" class ="img-fluid">
-                </div>
-            </div>
-            <div class="col-lg-8 col-md-12 col-12 ps-lg-5 mt-md-5">
-                <div class="about-text">
-                    <h2>We have great security</h2>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Inventore rerum pariatur dolores quae nisi delectus magni, tempora aliquid. Quos, vero. Distinctio molestias maiores voluptates adipisci?</p>
-                    <a href="#" class="btn-warning">Learn More</a>
-                </div>
-            </div>
-            
-        </div>
-    </div>
-</section>
-<!-- services in the neighbourhood -->
-<section id="services" class="services section-padding">
-    <div class="cntainer">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="section-header text-center pb-5">
-                    <h2>Le-backyard services</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione laboriosam repellendus, modi adipisci porro iure saepe rem eius maiores provident minus facere! Earum quisquam beatae rem, dolores provident mollitia voluptates?</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-md-12 col-lg-4">
-            <div class="card text-white text-center bg-dark pb-2">
-              <div class="card-body">
 
-              </div> 
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-2">
+            
+        
+           
+        <div class="about">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8SDBMfT_X69RRexaKXuv9tBESNwVMdRHJ_w&usqp=CAUalt=" height="400px" width="300px">
+        </div> <br>
+        <button type="button" class="btn btn-dark btn-sm" data-toggle="modal" data-target="#hoodModal">+
+            create Neighborhood</button> <br>
+        </div>
+        
+        <div class="col-md-10">
+            {% if neighborhoods %}
+            {% for neighbourhood in neighborhoods %}
+
+            <div class="card">
+                <img class="card-img-top img-fluid" src="{{neighbourhood.photo.url}}" alt="Card image" style="width:100%">
+                <div class="card-body">
+                    <h4 class="card-title">{{neighborhood.name}}</h4>
+                    <p> <em>Location:</em> {{neighbourhood.location}}
+                         <br>
+                         <em>No of Occupants:</em>{{neighbourhood.occupants_count}}<br>
+                         <em>Plice Contacts:</em> {{neighbourhood.police_cont}}<br>
+                         <em>Hospital Contacts:</em>  {{neighbourhood.hospital_cont}}<br>
+                         <em>Created at:</em> {{neighbourhood.created_at}}<br>
+                    {%if not request.user.profile.neighbourhood%} <p>
+                    <a href="{% url 'joinhood' neighbourhood.id %}" class="btn btn-dark">Join
+                        {{neighbourhood.name}}</a>
+                    {%endif%}
+                </div>
+            </div>
+            {% endfor %}
+            {%else%}
+            <p>There are no Available Neighbourhoods</p>
+            {%endif%}
+        </div>
+       
+    </div>
+
+
+</div>
+
+<!-- <div class="modal fade" tabindex="-1" id="hoodModal" role="dialog"> -->
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Create Neighbourhood</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                  
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Save changes</button>
+                </form>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
+</div>
 </section>
 
 
