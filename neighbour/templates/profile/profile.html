@@ -1,0 +1,77 @@
+{%extends 'base.html'%}
+{% load bootstrap4 %}
+{% block content %}
+{{block.super}}
+<div class="container" id="profile">
+
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-6">
+            <div class="profilebtn">
+            {% if profile.profile_photo%}
+            <img src="{{profile.profile_photo.url}}" alt="" height="300px" class="img-responsive" width="100%"
+                style="border-radius: 50%;">
+            {%else%}
+            <img src="https://i.pinimg.com/474x/82/ab/35/82ab3533ee71daf256f23c1ccf20ad6f--avatar-maker.jpg" alt=""
+                height="300px" class="img-responsive" width="100%" style="border-radius: 50%;">
+            {%endif%}
+
+            {% if profile.bio%}
+            <p>{{profile.bio}}</p>
+            {%else%}
+            <p>No bio</p>
+            {%endif%}
+        </div>
+            <div class="update">
+                <button type="button" id="updatebtn" class="btn btn-outline-dark btn-sm" data-toggle="modal"
+                data-target="#updateprofile">Update Profile</button>
+            </div>
+            
+                
+              
+        </div>
+        <div class="col-md-5"></div>
+
+
+
+    </div>
+    <div class="row">
+        
+        <div class="col-md-4">
+            {% if user.profile.neighbourhood %}
+           <a href="{% url 'neighbourhood' user.profile.neighbourhood.id %}" class="btn btn-dark"> {{user.profile.neighbourhood.name}}</a>
+          {% else %}
+          <a href="/" class="btn btn-dark">Choose Hood</a>
+          {% endif %}
+            
+        </div>
+        <div class="col-md-4">
+           
+        </div>
+        <div class="col-md-4"></div>
+   
+</div>
+<div class="modal fade" tabindex="-1" id="updateprofile" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Create Neighbourhood</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                  </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Save changes</button>
+                </form>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
